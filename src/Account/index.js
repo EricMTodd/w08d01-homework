@@ -23,17 +23,24 @@ class Account extends Component {
     e.preventDefault();
     const amount = parseInt(this.inputBox.value);
     const newBalance = this.state.balance - amount;
-    this.setState({
-      balance: newBalance
-    })
-    this.inputBox.value = "";
+    if (newBalance > 0) {
+      this.setState({
+        balance: newBalance
+      })
+      this.inputBox.value = "";
+    } else {
+      this.setState({
+        balance: 0
+      })
+      this.inputBox.value = "";
+    }
   }
 
   render() {
     console.log(`this.state.balance: ${this.state.balance}`)
-    const balanceClass = "balance";
+    let balanceClass = "balance";
     if (this.state.balance === 0) {
-      balanceClass + " zero"
+      balanceClass += " zero"
     }
     return (
       <div className="account">
